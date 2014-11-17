@@ -1,0 +1,31 @@
+Main
+-game
+
+-menu		bart
+--startbutton
+--controls
+
+-gameOverMenu		bart
+--restart game
+--back to main menu
+
+-Player			rocky
+--bepaalt globalspeed
+--kan springen
+--heeft een gravity
+
+-Background		
+--loopend
+
+-obstacles (movement van de obstakels)		rocky
+--background en alle obstacles gebuiken deze movement(inheriten)
+
+-puzzle obstacle
+--reeks van keycodes om te unlocken fout = restart puzzle
+
+-enemy
+--local speed die steeds sneller word
+--als die te dichtbij is ga je af
+
+-Sounds
+//word nog bepaald
