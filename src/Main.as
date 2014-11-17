@@ -2,6 +2,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import Menus.MainMenu;
 	
 	/**
 	 * ...
@@ -9,6 +10,7 @@ package
 	 */
 	public class Main extends Sprite 
 	{
+		private var _mainMenu:MainMenu;
 		
 		public function Main():void 
 		{
@@ -19,7 +21,7 @@ package
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			// entry point
+			_mainMenu = new MainMenu();
 		}
 		
 	}
