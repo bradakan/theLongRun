@@ -1,31 +1,33 @@
-<<<<<<< HEAD
 package GameElements {
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	
-=======
-package GameElements 
-{
-	import flash.display.MovieClip;
->>>>>>> 529fa59d62546d80343a113396fbe319a31bb36a
 	/**
 	 * ...
 	 * @author Bart van der Geest
 	 */
 	public class Game extends MovieClip
 	{
-		private var _globalSpeed
+		private var _globalSpeed:int = 0;
+		private var _player:Player;
 		
 		public function Game()
 		{
-			addEventListener(Player.GLOBALSPEED_DOWN,changeGlobalSpeed(-1));
-			addEventListener(Player.GLOBALSPEED_UP,changeGlobalSpeed(1));
+			_player = new Player();
+			addChild(_player);
+			
+			addEventListener(Player.GLOBALSPEED_DOWN,changeGlobalSpeedDown);
+			addEventListener(Player.GLOBALSPEED_UP,changeGlobalSpeedUp);
 		}
 		
-		private function changeGlobalSpeed(i:int)
+		private function changeGlobalSpeedUp()
 		{
-			_globalSpeed += i;
+			_globalSpeed += 1;
 		}
+		private function changeGlobalSpeedDown()
+		{
+			_globalSpeed += 1;
+		}
+		
 	}
 
 }

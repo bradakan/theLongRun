@@ -2,7 +2,9 @@ package Menus
 {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.net.NetStreamMulticastInfo;
 	import GameElements.Game;
+	import flash.events.Event;
 	/**
 	 * ...
 	 * @author Bart van der Geest
@@ -10,7 +12,7 @@ package Menus
 	public class MainMenu extends Sprite
 	{
 		private var _startButton:StartGameButton;
-		private var _game:Game;
+		public static const START_GAME:String = "startGame";
 		
 		
 		public function MainMenu() 
@@ -26,10 +28,7 @@ package Menus
 		{
 			if (e.target == _startButton)
 			{
-				trace("lalal");
-				_game = new Game();
-				addChild(_game);
-				removeChild(_startButton);
+				dispatchEvent(new Event(START_GAME,true));
 			}
 		}
 	}
