@@ -2,7 +2,6 @@ package Menus
 {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import GameElements.Game;
 	import flash.events.Event;
 	/**
 	 * ...

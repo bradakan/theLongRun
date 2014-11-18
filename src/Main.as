@@ -3,6 +3,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import GameElements.Game;
+	import Menus.GameOverMenu;
 	import Menus.MainMenu;
 	
 	/**
@@ -12,6 +13,8 @@ package
 	public class Main extends Sprite 
 	{
 		private var _mainMenu:MainMenu;
+		private var _game:Game;
+		private var _deathScreen:GameOverMenu;
 		
 		public function Main():void 
 		{
@@ -31,6 +34,10 @@ package
 		{
 			_game = new Game();
 			removeChild(_mainMenu);
+		}
+		private function gameOver(e:Event):void
+		{
+			_deathScreen = new GameOverMenu();
 		}
 		
 	}
