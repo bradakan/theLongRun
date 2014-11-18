@@ -10,7 +10,7 @@ package
 	 */
 	public class Main extends Sprite 
 	{
-		public var _mainMenu:MainMenu;
+		private var _mainMenu:MainMenu;
 		
 		public function Main():void 
 		{

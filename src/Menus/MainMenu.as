@@ -3,6 +3,8 @@ package Menus
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import GameElements.Game;
+	import flash.display.Stage;
+	import flash.events.Event;
 	/**
 	 * ...
 	 * @author Bart van der Geest
@@ -13,7 +15,12 @@ package Menus
 		private var _game:Game;
 		
 		
-		public function MainMenu() 
+		public function Main():void 
+		{
+			if (stage) init();
+			else addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		private function init(e:Event = null):void 
 		{
 			_startButton = new StartGameButton();
 			_startButton.x = 200;
@@ -27,9 +34,9 @@ package Menus
 			if (e.target == _startButton)
 			{
 				trace("lalal");
-				_game = new Game();
-				addChild(_game);
-				removeChild(_startButton);
+				stage._game = new Game();
+				stage.addChild(_game);
+				stage.removeChild(_startButton);
 			}
 		}
 	}
