@@ -10,7 +10,7 @@ package
 	 */
 	public class Main extends Sprite 
 	{
-		private var _mainMenu:MainMenu;
+		public var _mainMenu:MainMenu;
 		
 		public function Main():void 
 		{
@@ -22,6 +22,7 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			_mainMenu = new MainMenu();
+			addChild(_mainMenu);
 		}
 		
 	}
