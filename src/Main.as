@@ -26,6 +26,7 @@ package
 			_mainMenu = new MainMenu();
 			_game = new Game();
 			addChild(_game);
+			addChild(_mainMenu);
 		}
 		
 	}
