@@ -8,11 +8,17 @@ package GameElements {
 	 */
 	public class Player extends Sprite
 	{
+		private var _playerArt:CharacterArt;
 		public static const GLOBALSPEED_DOWN:String = "globalspeedDown";
 		public static const GLOBALSPEED_UP:String = "globalspeedUp";
+		public static const JUMPING_PLAYER:String = "jumpPlayer";
+		
 		public function Player() 
 		{
-			addEventListener(KeyboardEvent.KEY_DOWN,move);
+			_playerArt = new CharacterArt();
+			addChild(_playerArt);
+			
+			addEventListener(KeyboardEvent.KEY_DOWN, move);
 		}
 		
 		private function move(e:KeyboardEvent):void 
@@ -35,14 +41,14 @@ package GameElements {
 			}
 			if (e.keyCode == 32)
 			{
-				//jump
+				dispatchEvent(new Event(JUMPING_PLAYER, true));
 			}			
 		}
 		
-		public function update()
+		/*public function update()
 		{
 			
-		}
+		}*/
 		
 	}
 

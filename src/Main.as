@@ -25,9 +25,11 @@ package
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			addEventListener(MainMenu.START_GAME,startGame);
+			
 			_mainMenu = new MainMenu();
 			addChild(_mainMenu);
+			
+			addEventListener(MainMenu.START_GAME,startGame);
 		}
 		
 		private function startGame(e:Event):void 

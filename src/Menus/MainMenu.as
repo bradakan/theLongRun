@@ -12,14 +12,15 @@ package Menus
 		private var _startButton:StartGameButton;
 		public static const START_GAME:String = "startGame";
 		
-		
-		public function Main():void 
+		public function MainMenu():void 
 		{
 			if (stage) init();
-			else addEventListener(Event.ADDED_TO_STAGE, init);
+			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		private function init(e:Event = null):void 
 		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
 			_startButton = new StartGameButton();
 			_startButton.x = 200;
 			_startButton.y = 200;
@@ -31,7 +32,7 @@ package Menus
 		{
 			if (e.target == _startButton)
 			{
-				dispatchEvent(new Event(START_GAME,true));
+				dispatchEvent(new Event(START_GAME, true));
 			}
 		}
 	}
