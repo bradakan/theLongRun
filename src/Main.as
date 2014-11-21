@@ -35,6 +35,7 @@ package
 		private function startGame(e:Event):void 
 		{
 			_game = new Game();
+			addChild(_game);
 			removeChild(_mainMenu);
 		}
 		private function gameOver(e:Event):void

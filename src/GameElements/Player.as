@@ -9,8 +9,9 @@ package GameElements {
 	public class Player extends Sprite
 	{
 		private var _playerArt:CharacterArt;
-		public static const GLOBALSPEED_DOWN:String = "globalspeedDown";
-		public static const GLOBALSPEED_UP:String = "globalspeedUp";
+		
+		public static const GLOBALSPEED_DOWN:String = "changeGlobalspeedDown";
+		public static const GLOBALSPEED_UP:String = "changeGlobalspeedUp";
 		public static const JUMPING_PLAYER:String = "jumpPlayer";
 		
 		public function Player() 

@@ -11,7 +11,7 @@ package GameElements
 	{
 		//player stuff
 		private var _globalSpeed:int = 0;
-		private var _jumpForce:int = 8;
+		private var _jumpForce:int = 80;
 		private var _player:Player;
 		private var _isJumping:Boolean = false;
 		
@@ -26,7 +26,7 @@ package GameElements
 		{
 			_player = new Player();
 			_player.x = 80;
-			_player.y = 400;
+			_player.y = 100;
 			addChild(_player);
 			
 			_ground = new DummyGround();
@@ -69,7 +69,7 @@ package GameElements
 		}
 		private function update(e:Event):void
 		{
-			_player.y ++;
+			_player.y += 1;
 			if (_player.hitTestObject(_ground))
 			{
 				_player.y += -1;
