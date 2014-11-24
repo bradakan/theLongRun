@@ -38,6 +38,7 @@ package GameElements {
 			//a = 65 
 			//d == 68
 			//left
+			trace(e.keyCode);
 			if (e.keyCode == 37 || e.keyCode == 65)
 			{
 				//dispatch globalspeed down
