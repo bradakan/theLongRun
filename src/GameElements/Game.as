@@ -14,10 +14,9 @@ package GameElements
 		private var _globalSpeed:int = 0;
 		private var _jumpForce:int = 80;
 		private var _player:Player;
-<<<<<<< HEAD
 		private var _background:Backgound;
-=======
 		private var _isJumping:Boolean = false;
+		private var _gravity:int = 5;
 		
 		//game over stuff
 		private var _impendingDoom:Boolean = false;
@@ -25,14 +24,13 @@ package GameElements
 		
 		//level stuff
 		private var _ground:DummyGround;
->>>>>>> 57059c3830aeea1eb25278fe4174bfa68046b7b8
 		
 		public function Game()
 		{
 			
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
-			addEventListener(Event.ENTER_FRAME,gameLoop);
+			//addEventListener(Event.ENTER_FRAME,gameLoop);
 			//addEventListener(Player.GLOBALSPEED_DOWN,changeGlobalSpeedDown);
 			//addEventListener(Player.GLOBALSPEED_UP,changeGlobalSpeedUp);
 		}
@@ -42,13 +40,8 @@ package GameElements
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			_background = new Backgound();
 			_player = new Player();
-<<<<<<< HEAD
 			addChild(_background);
 			addChild(_player);
-		}
-		
-		private function gameLoop(e:Event):void 
-=======
 			_player.x = 80;
 			_player.y = 100;
 			addChild(_player);
@@ -63,7 +56,6 @@ package GameElements
 			addEventListener(Player.JUMPING_PLAYER, jumpPlayer);
 			addEventListener(Event.ENTER_FRAME, update);
 			
-			trace(_player, _ground)
 			
 			//even hier neergezet want ik weet op het moment geen andere plek xd
 			if (_impendingDoom == true)
@@ -71,14 +63,12 @@ package GameElements
 				dispatchEvent(new Event(END_GAME, true));
 			}
 		}
-		
+		/*
 		private function changeGlobalSpeedUp():void
->>>>>>> 57059c3830aeea1eb25278fe4174bfa68046b7b8
 		{
 			root.scrollRect = new Rectangle(_player.x - stage.stageWidth/2, _player.y - stage.stageHeight/2, stage.stageWidth, stage.stageHeight);
 		}
-<<<<<<< HEAD
-		/*
+		*/
 		private function changeGlobalSpeedUp():void
 		{
 			_globalSpeed += 1;
@@ -87,14 +77,7 @@ package GameElements
 		{
 			_globalSpeed -= 1;
 		}
-		*/
 		
-		
-=======
-		private function changeGlobalSpeedDown():void
-		{
-			_globalSpeed += 1;
-		}
 		private function jumpPlayer():void
 		{
 			_isJumping = true;
@@ -108,13 +91,13 @@ package GameElements
 		}
 		private function update(e:Event):void
 		{
-			_player.y += 1;
+			_player.update();
 			if (_player.hitTestObject(_ground))
 			{
-				_player.y += -1;
+				_player.velocityY = 0;
+				_player.y = _ground.y - _player.height;
 			}
 		}
->>>>>>> 57059c3830aeea1eb25278fe4174bfa68046b7b8
 	}
 
 }

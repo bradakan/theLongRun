@@ -8,17 +8,8 @@ package GameElements {
 	 */
 	public class Player extends MovieClip
 	{
-<<<<<<< HEAD
-		public static const GLOBALSPEED_DOWN:String = "globalspeedDown";
-		public static const GLOBALSPEED_UP:String = "globalspeedUp";
-		private var _asset:PlayerClass;
 		
-		public function Player() 
-		{
-			_asset = new PlayerClass();
-			addChild(_asset);
-			addEventListener(KeyboardEvent.KEY_DOWN,move);
-=======
+		private var _velocityY:int = 5;
 		private var _playerArt:CharacterArt;
 		
 		public static const GLOBALSPEED_DOWN:String = "changeGlobalspeedDown";
@@ -29,9 +20,15 @@ package GameElements {
 		{
 			_playerArt = new CharacterArt();
 			addChild(_playerArt);
+			addEventListener(Event.ADDED_TO_STAGE,init);
+		}
+		
+		private function init(e:Event):void 
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			addEventListener(KeyboardEvent.KEY_DOWN, move);
->>>>>>> 57059c3830aeea1eb25278fe4174bfa68046b7b8
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, move);
+			
 		}
 		
 		private function move(e:KeyboardEvent):void 
@@ -40,7 +37,6 @@ package GameElements {
 			//right arrow key == 39
 			//a = 65 
 			//d == 68
-			
 			//left
 			if (e.keyCode == 37 || e.keyCode == 65)
 			{
@@ -56,18 +52,28 @@ package GameElements {
 			}
 			if (e.keyCode == 32)
 			{
-				dispatchEvent(new Event(JUMPING_PLAYER, true));
+				//dispatchEvent(new Event(JUMPING_PLAYER, true));
+				trace("pewpew");
+				_velocityY = -20;
 			}			
 		}
-		
-<<<<<<< HEAD
 		public function update():void
-=======
-		/*public function update()
->>>>>>> 57059c3830aeea1eb25278fe4174bfa68046b7b8
 		{
+			y += _velocityY;
 			
-		}*/
+			_velocityY++;
+			
+		}
+		
+		public function get velocityY():int 
+		{
+			return _velocityY;
+		}
+		
+		public function set velocityY(value:int):void 
+		{
+			_velocityY = value;
+		}
 		
 	}
 

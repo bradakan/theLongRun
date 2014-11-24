@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'21-11-2014'</value>
+      <value>'24-11-2014'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -32,20 +32,16 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\Users\Bart\School\Jaar 2\Scope\theLongRun\src</path-element>
+      <path-element>C:\Users\Rocky Tempelaars\Documents\GitHub\theLongRun\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-<<<<<<< HEAD
       <path-element>C:\Users\Rocky Tempelaars\Documents\GitHub\theLongRun\lib\artAssets.swc</path-element>
       <path-element>C:\Users\Rocky Tempelaars\Documents\GitHub\theLongRun\lib\theLongRunAssets.swc</path-element>
-=======
-      <path-element>C:\Users\Bart\School\Jaar 2\Scope\theLongRun\lib\artAssets.swc</path-element>
->>>>>>> 57059c3830aeea1eb25278fe4174bfa68046b7b8
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>C:\Users\Bart\School\Jaar 2\Scope\theLongRun\src\Main.as</path-element>
+    <path-element>C:\Users\Rocky Tempelaars\Documents\GitHub\theLongRun\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
