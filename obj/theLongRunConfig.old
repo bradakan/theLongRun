@@ -39,6 +39,7 @@
     </source-path>
     <library-path append="true">
       <path-element>C:\Users\Rocky Tempelaars\Documents\GitHub\theLongRun\lib\artAssets.swc</path-element>
+      <path-element>C:\Users\Rocky Tempelaars\Documents\GitHub\theLongRun\lib\theLongRunAssets.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>

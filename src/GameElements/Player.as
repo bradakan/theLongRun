@@ -1,17 +1,21 @@
 package GameElements {
-	import flash.display.Sprite;
+	import flash.display.MovieClip;
 	import flash.events.KeyboardEvent;
 	import flash.events.Event;
 	/**
 	 * ...
 	 * @author Rocky Tempelaars
 	 */
-	public class Player extends Sprite
+	public class Player extends MovieClip
 	{
 		public static const GLOBALSPEED_DOWN:String = "globalspeedDown";
 		public static const GLOBALSPEED_UP:String = "globalspeedUp";
+		private var _asset:PlayerClass;
+		
 		public function Player() 
 		{
+			_asset = new PlayerClass();
+			addChild(_asset);
 			addEventListener(KeyboardEvent.KEY_DOWN,move);
 		}
 		
@@ -26,12 +30,14 @@ package GameElements {
 			if (e.keyCode == 37 || e.keyCode == 65)
 			{
 				//dispatch globalspeed down
-				dispatchEvent(new Event(GLOBALSPEED_DOWN,true));
+				dispatchEvent(new Event(GLOBALSPEED_DOWN, true));
+				this.x -= 1;
 			}
 			if (e.keyCode == 39 || e.keyCode == 68)
 			{
 				//dispatch globalspeed up
-				dispatchEvent(new Event(GLOBALSPEED_UP,true));
+				dispatchEvent(new Event(GLOBALSPEED_UP, true));
+				this.x -= 1;
 			}
 			if (e.keyCode == 32)
 			{
@@ -39,7 +45,7 @@ package GameElements {
 			}			
 		}
 		
-		public function update()
+		public function update():void
 		{
 			
 		}
