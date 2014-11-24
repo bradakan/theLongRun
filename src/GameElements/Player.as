@@ -8,6 +8,7 @@ package GameElements {
 	 */
 	public class Player extends MovieClip
 	{
+<<<<<<< HEAD
 		public static const GLOBALSPEED_DOWN:String = "globalspeedDown";
 		public static const GLOBALSPEED_UP:String = "globalspeedUp";
 		private var _asset:PlayerClass;
@@ -17,6 +18,20 @@ package GameElements {
 			_asset = new PlayerClass();
 			addChild(_asset);
 			addEventListener(KeyboardEvent.KEY_DOWN,move);
+=======
+		private var _playerArt:CharacterArt;
+		
+		public static const GLOBALSPEED_DOWN:String = "changeGlobalspeedDown";
+		public static const GLOBALSPEED_UP:String = "changeGlobalspeedUp";
+		public static const JUMPING_PLAYER:String = "jumpPlayer";
+		
+		public function Player() 
+		{
+			_playerArt = new CharacterArt();
+			addChild(_playerArt);
+			
+			addEventListener(KeyboardEvent.KEY_DOWN, move);
+>>>>>>> 57059c3830aeea1eb25278fe4174bfa68046b7b8
 		}
 		
 		private function move(e:KeyboardEvent):void 
@@ -41,14 +56,18 @@ package GameElements {
 			}
 			if (e.keyCode == 32)
 			{
-				//jump
+				dispatchEvent(new Event(JUMPING_PLAYER, true));
 			}			
 		}
 		
+<<<<<<< HEAD
 		public function update():void
+=======
+		/*public function update()
+>>>>>>> 57059c3830aeea1eb25278fe4174bfa68046b7b8
 		{
 			
-		}
+		}*/
 		
 	}
 
