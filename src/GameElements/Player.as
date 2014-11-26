@@ -38,17 +38,18 @@ package GameElements {
 			//a = 65 
 			//d == 68
 			//left
+			trace(e.keyCode);
 			if (e.keyCode == 37 || e.keyCode == 65)
 			{
 				//dispatch globalspeed down
 				dispatchEvent(new Event(GLOBALSPEED_DOWN, true));
-				this.x -= 1;
+				//this.x += 1;
 			}
 			if (e.keyCode == 39 || e.keyCode == 68)
 			{
 				//dispatch globalspeed up
 				dispatchEvent(new Event(GLOBALSPEED_UP, true));
-				this.x -= 1;
+				//this.x -= 1;
 			}
 			if (e.keyCode == 32)
 			{

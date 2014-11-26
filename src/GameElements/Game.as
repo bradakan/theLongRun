@@ -15,6 +15,7 @@ package GameElements
 		private var _jumpForce:int = 80;
 		private var _player:Player;
 		private var _background:Backgound;
+		private var _background2:Backgound;
 		private var _isJumping:Boolean = false;
 		private var _gravity:int = 5;
 		
@@ -39,8 +40,11 @@ package GameElements
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			_background = new Backgound();
+			_background2 = new Backgound();
+			_background2.x = _background2.width;
 			_player = new Player();
 			addChild(_background);
+			addChild(_background2);
 			addChild(_player);
 			_player.x = 80;
 			_player.y = 100;
@@ -52,8 +56,8 @@ package GameElements
 			addChild(_ground);
 			
 			addEventListener(Player.GLOBALSPEED_DOWN,changeGlobalSpeedDown);
-			addEventListener(Player.GLOBALSPEED_UP, changeGlobalSpeedUp);
-			addEventListener(Player.JUMPING_PLAYER, jumpPlayer);
+			addEventListener(Player.GLOBALSPEED_UP,changeGlobalSpeedUp);
+			addEventListener(Player.JUMPING_PLAYER,jumpPlayer);
 			addEventListener(Event.ENTER_FRAME, update);
 			
 			
@@ -63,17 +67,12 @@ package GameElements
 				dispatchEvent(new Event(END_GAME, true));
 			}
 		}
-		/*
-		private function changeGlobalSpeedUp():void
-		{
-			root.scrollRect = new Rectangle(_player.x - stage.stageWidth/2, _player.y - stage.stageHeight/2, stage.stageWidth, stage.stageHeight);
-		}
-		*/
-		private function changeGlobalSpeedUp():void
+		
+		private function changeGlobalSpeedUp(e:Event):void
 		{
 			_globalSpeed += 1;
 		}
-		private function changeGlobalSpeedDown():void
+		private function changeGlobalSpeedDown(e:Event):void
 		{
 			_globalSpeed -= 1;
 		}
@@ -91,6 +90,18 @@ package GameElements
 		}
 		private function update(e:Event):void
 		{
+			
+			_background.x += _globalSpeed;
+			_background2.x += _globalSpeed;
+			if (_background.x <= -_background.width)
+			{
+				_background.x = _background2.x + _background.width;
+			}
+			if (_background2.x <= -_background2.width)
+			{
+				_background2.x = _background.x + _background2.width;
+			}
+			
 			_player.update();
 			if (_player.hitTestObject(_ground))
 			{
