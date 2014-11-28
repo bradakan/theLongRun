@@ -10,7 +10,8 @@ package Menus
 	public class GameOverMenu extends Sprite
 	{
 		private var _death:DeathText;
-		private var _startButton:StartGameButton;
+		private var _startButton:RestartButton;
+		private var _background:introBackground;
 		
 		public function GameOverMenu() 
 		{
@@ -21,9 +22,11 @@ package Menus
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			_startButton = new StartGameButton();
-			_startButton.x = 200;
-			_startButton.y = 200;
+			_background = new introBackground();
+			_startButton = new RestartButton();
+			_startButton.x = 100;
+			_startButton.y = 400;
+			addChild(_background);
 			addChild(_startButton);
 			
 			addEventListener(MouseEvent.CLICK, playGame);

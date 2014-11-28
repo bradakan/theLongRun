@@ -36,8 +36,8 @@ package GameElements
 		private function init(e:Event):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			_background = new Backgound();
-			_background2 = new Backgound();
+			_background = new Background1();
+			_background2 = new Background2();
 			_background2.x = _background2.width;
 			_background2.y = _background.y;
 			_player = new Player(this);
