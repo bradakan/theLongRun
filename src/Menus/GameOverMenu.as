@@ -2,6 +2,7 @@ package Menus
 {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.events.Event;
 	/**
 	 * ...
 	 * @author Bart van der Geest
@@ -9,13 +10,30 @@ package Menus
 	public class GameOverMenu extends Sprite
 	{
 		private var _death:DeathText;
+		private var _startButton:StartGameButton;
 		
 		public function GameOverMenu() 
 		{
-			_death = new DeathText();
-			_death.x = 200;
-			_death.y = 200;
-			addChild(_death);
+			addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		private function init(e:Event):void 
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
+			_startButton = new StartGameButton();
+			_startButton.x = 200;
+			_startButton.y = 200;
+			addChild(_startButton);
+			
+			addEventListener(MouseEvent.CLICK, playGame);
+		}
+		private function playGame(e:MouseEvent):void
+		{
+			if (e.target == _startButton)
+			{
+				dispatchEvent(new Event(MainMenu.START_GAME, true));
+			}
 		}
 	}
 

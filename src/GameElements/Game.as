@@ -1,39 +1,36 @@
 package GameElements 
 {
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import Menus.GameOverMenu;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
 	/**
 	 * ...
-	 * @author Bart van der Geest
+	 * @author Bart van der Geest & Rocky Tempelaaars
 	 */
-	public class Game extends Sprite
+	public class Game extends MovieClip
 	{
 		//player stuff
-		private var _globalSpeed:int = 0;
+		private var _toBeRemoved:Boolean = false;
+		private var _obstacleTimer:Timer;
+		private var _globalSpeed:int = -10;
+		private var _maxGlobalSpeed:int = 10;
 		private var _jumpForce:int = 80;
 		private var _player:Player;
-		private var _background:Backgound;
-		private var _background2:Backgound;
+		private var _background:MovieClip;
+		private var _background2:MovieClip;
 		private var _isJumping:Boolean = false;
 		private var _gravity:int = 5;
-		
+		private var _obstacles:Array = [];
+		private var _enemy:EnemyArt;
 		//game over stuff
-		private var _impendingDoom:Boolean = false;
 		public static const END_GAME:String = "gameOver";
-		
-		//level stuff
-		private var _ground:DummyGround;
-		
 		public function Game()
 		{
-			
-			
 			addEventListener(Event.ADDED_TO_STAGE, init);
-			//addEventListener(Event.ENTER_FRAME,gameLoop);
-			//addEventListener(Player.GLOBALSPEED_DOWN,changeGlobalSpeedDown);
-			//addEventListener(Player.GLOBALSPEED_UP,changeGlobalSpeedUp);
 		}
 		
 		private function init(e:Event):void 
@@ -42,72 +39,109 @@ package GameElements
 			_background = new Backgound();
 			_background2 = new Backgound();
 			_background2.x = _background2.width;
-			_player = new Player();
+			_background2.y = _background.y;
+			_player = new Player(this);
+			_enemy = new EnemyArt();
 			addChild(_background);
 			addChild(_background2);
 			addChild(_player);
-			_player.x = 80;
-			_player.y = 100;
+			_player.x = _player.width;
+			_player.y = 430;
 			addChild(_player);
+			_enemy.y = _player.y;
+			_enemy.x =  _player.x - 200;
+			addChild(_enemy);
+			_obstacleTimer = new Timer(5000,1);
+			_obstacleTimer.addEventListener(TimerEvent.TIMER_COMPLETE,spawnObstacle);
+			_obstacleTimer.start();
 			
-			_ground = new DummyGround();
-			_ground.x = 50;
-			_ground.y = 400;
-			addChild(_ground);
-			
-			addEventListener(Player.GLOBALSPEED_DOWN,changeGlobalSpeedDown);
-			addEventListener(Player.GLOBALSPEED_UP,changeGlobalSpeedUp);
-			addEventListener(Player.JUMPING_PLAYER,jumpPlayer);
+			//addEventListener(Player.GLOBALSPEED_DOWN,changeGlobalSpeedDown);
+			//addEventListener(Player.GLOBALSPEED_UP,changeGlobalSpeedUp);
 			addEventListener(Event.ENTER_FRAME, update);
+			addEventListener(Obstacle.REMOVE_OBSTACLE,removeObstacle);
 			
-			
-			//even hier neergezet want ik weet op het moment geen andere plek xd
-			if (_impendingDoom == true)
+		}
+		
+		private function spawnObstacle(e:TimerEvent):void 
+		{
+			if (_toBeRemoved == false)
 			{
-				dispatchEvent(new Event(END_GAME, true));
+				var obstacle = new Obstacle();
+				obstacle.x = stage.stageWidth + obstacle.width;
+				obstacle.y = 430;
+				addChild(obstacle);
+				_obstacles.push(obstacle);
+				trace(_obstacles.length);
+				_globalSpeed--;
+				_obstacleTimer.start();
 			}
+		}
+		
+		private function removeObstacle(e:Event):void 
+		{
+			var currentObstacle : Obstacle = e.target as Obstacle;
+			var index : int = _obstacles.indexOf(currentObstacle);
+			removeChild(_obstacles[index]);
+			_obstacles.splice(index,1);
 		}
 		
 		private function changeGlobalSpeedUp(e:Event):void
 		{
-			_globalSpeed += 1;
+			if (_globalSpeed > -_maxGlobalSpeed)
+			{
+				_globalSpeed -= 1;
+			}
 		}
 		private function changeGlobalSpeedDown(e:Event):void
 		{
-			_globalSpeed -= 1;
-		}
-		
-		private function jumpPlayer():void
-		{
-			_isJumping = true;
-			_player.y += _jumpForce;
-			while (_isJumping == true)
+			if (_globalSpeed < 0)
 			{
-				_isJumping = false;
-				_jumpForce -= 1;
-				
+				_globalSpeed += 1;
 			}
 		}
 		private function update(e:Event):void
 		{
-			
-			_background.x += _globalSpeed;
-			_background2.x += _globalSpeed;
-			if (_background.x <= -_background.width)
+			if (_toBeRemoved == false)
 			{
-				_background.x = _background2.x + _background.width;
+				_background.x += _globalSpeed;
+				_background2.x += _globalSpeed;				
+				_enemy.x =  _player.x - 200;
+				if (_background.x <= -_background.width)
+				{
+					_background.x = _background2.x + _background.width;
+				}
+				if (_background2.x <= -_background2.width)
+				{
+					_background2.x = _background.x + _background2.width;
+				}
+				if (_obstacles.length > 0)
+				{
+					for (var i:int = _obstacles.length - 1; i >= 0; i--)
+					{
+						
+						if (_player.hitTestObject(_obstacles[i].hitBox))
+						{
+							dispatchEvent(new Event(Game.END_GAME,true));
+						}
+						_obstacles[i].update(_globalSpeed);
+					}
+				}
+				
+				
+				_player.update();
+				trace(_obstacleTimer.running);
+				trace(_obstacles.length);
 			}
-			if (_background2.x <= -_background2.width)
-			{
-				_background2.x = _background.x + _background2.width;
-			}
-			
-			_player.update();
-			if (_player.hitTestObject(_ground))
-			{
-				_player.velocityY = 0;
-				_player.y = _ground.y - _player.height;
-			}
+		}
+		
+		public function get toBeRemoved():Boolean 
+		{
+			return _toBeRemoved;
+		}
+		
+		public function set toBeRemoved(value:Boolean):void 
+		{
+			_toBeRemoved = value;
 		}
 	}
 
