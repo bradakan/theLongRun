@@ -45,17 +45,7 @@ package GameElements {
 			//a = 65 
 			//d == 68
 			//left
-			
-			if (e.keyCode == 37 || e.keyCode == 65)
-			{
-				//dispatch globalspeed down
-				dispatchEvent(new Event(GLOBALSPEED_DOWN, true));
-			}
-			if (e.keyCode == 39 || e.keyCode == 68)
-			{
-				//dispatch globalspeed up
-				dispatchEvent(new Event(GLOBALSPEED_UP, true));
-			}
+
 			if (e.keyCode == 32)
 			{
 				//dispatchEvent(new Event(JUMPING_PLAYER, true));
